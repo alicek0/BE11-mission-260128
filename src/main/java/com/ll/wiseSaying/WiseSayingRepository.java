@@ -140,11 +140,36 @@ public class WiseSayingRepository {
         wiseSaying.setAuthor(author);
     }
 
+    public void build() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[\n");
+        for (int i = 0; i < wiseSayings.size(); i++){
+            WiseSaying saying = wiseSayings.get(i);
+            sb.append("\t{\n");
+            sb.append("\t\t\"id\": ").append(saying.getId()).append(",\n");  // ID
+            sb.append("\t\t\"content\": \"").append(saying.getWiseSaying()).append("\",\n");  // Content
+            sb.append("\t\t\"author\": \"").append(saying.getAuthor()).append("\"\n");  // Author
+            sb.append("\t}");
+            if (i != wiseSayings.size() - 1) { // Don't add comma if is last to be added (JSON format)
+                sb.append(",");
+            }
+            sb.append("\n");
+        }
+        sb.append("]");
+
+        String allWiseSayings = sb.toString();
+        writeStringToFile("data.json", allWiseSayings);  // Save JSON String to file
+    }
 
     // Private functions
+    /**
+     * params fileName, content
+     * **/
     private void writeStringToFile(String fileName, String content){
-        Path file = Paths.get(DB_PATH + "/" + fileName);
+        Path file = Paths.get(DB_PATH, fileName);
         try {
+            // Create file if it doesn't exist, and replace if it exists
             Files.writeString(file, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             System.out.println("파일 저장 실패: " + e.getMessage());

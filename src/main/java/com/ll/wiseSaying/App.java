@@ -39,6 +39,10 @@ public class App {
                 int id = Integer.parseInt(idString);
                 wiseSayingController.modify(id);
             }
+            else if (command.equals("빌드")) {
+                wiseSayingController.build();
+                System.out.println("data.json 파일의 내용이 갱신되었습니다.");
+            }
             else {
                 System.out.println("존재하지 않는 명령입니다.");
                 System.out.println("사용 가능한 명령: 등록, 목록, 종료, 삭제?id={숫자}, 수정?id={숫자}, 빌드");

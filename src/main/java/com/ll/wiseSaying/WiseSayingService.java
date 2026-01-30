@@ -25,4 +25,8 @@ public class WiseSayingService {
     public void modify(WiseSaying wiseSaying, String content, String author){
         wiseSayingRepository.modify(wiseSaying, content, author);
     }
+
+    public void build() {
+        wiseSayingRepository.build();
+    }
 }

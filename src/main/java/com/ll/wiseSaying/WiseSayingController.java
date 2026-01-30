@@ -62,4 +62,8 @@ public class WiseSayingController {
 
         wiseSayingService.modify(wiseSaying, content, author);
     }
+
+    public void build() {
+        wiseSayingService.build();
+    }
 }
