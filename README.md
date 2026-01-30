@@ -52,31 +52,27 @@ _p-14471-mission-2-260128_
 
 ## 4. 프로젝트 구조 
 ### Main
-- App 실행되는 곳 
+- App을 실행합니다.
 ### App
 - 라우팅 담당. 사용자 입력 파싱하여 적절한 컨트롤러로 요청을 위임합니다.
 
 ### WiseSayingController
-`WiseSayingService` 호출해서 명령어 수행: 
-- 등록 `write`
-- 목록 `list`
-- 삭제 `delete`
-- 수정 `modify`
+사용자의 요청을 구체적으로 처리하며 `WiseSayingService`를 호출합니다.
+- 메서드: `write`(등록), `list`(목록), `delete`(삭제), `modify`(수정), `build`(빌드)
+
 ### WiseSayingService
-WiseSayingRepository 호출
-이번 앱에서는 굳이 필요없던 것 같은데 Service는 순수 비지니스 로직을 구현하는 목적
+- 비즈니스 로직을 담당하며 `WiseSayingRepository`를 호출합니다.
 
 ### WiseSayingRepository
-- `WiseSayingRepository` 생성 시 마지막 ID와 모든 명언을 파일에서 불러옵니다. (`lastId.txt`, `{숫자}.json`)
-- 생성/수정할 때 명언을 파일에 저장합니다. 파일이 없을 시 새로 생성하고 있다면 덮어씁니다.
-- `findById()` - ID로 명언을 반환합니다. 컨트롤러가 명언을 수정할 때 명언이 존재하는지 미리 확인하고 존재하지 않는 명언이라면 존재하지 않는다고 컨트롤러에서 반환하기 위해 만들었습니다.
-- 
+- 데이터의 저장소 역할을 하며 파일 시스템과 직접 통신합니다.
+- 앱 실행 시 `lastId.txt`와 모든 `json` 파일을 로딩하여 메모리에 적재합니다.
+- `findById()`: ID로 명언 객체를 찾습니다. 주로 컨트롤러에서 수정/삭제 전 데이터 존재 여부를 검증할 때 사용합니다.
 
-### 데이터베이스 파일 `db/`
-- `{숫자}.json` - n번째 명언이 저장된 파일.
-- `lastId.txt` - 마지막으로 등록된 ID 숫자. 다음으로 등록할 명언의 숫자를 기억하기 위해 저장됨. 
-- `data.json` - 전체 명언이 저장된 파일. 
+### 데이터베이스 파일 (`db/wiseSaying/`)
+- `{숫자}.json`: 개별 명언 데이터 파일
+- `lastId.txt`: 마지막으로 생성된 명언 ID (Auto Increment 구현용)
+- `data.json`: 빌드 명령어를 통해 생성된 전체 명언 통합 파일
 
 ### WiseSaying
-- 명언 클래스
+- 명언 객체 클래스 
 - `id`, `content`, `author`
