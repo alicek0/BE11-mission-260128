@@ -41,7 +41,7 @@ public class App {
             }
             else {
                 System.out.println("존재하지 않는 명령입니다.");
-                System.out.println("사용 가능한 명령: 등록, 목록, 종료, 삭제?id=, 수정?id=");
+                System.out.println("사용 가능한 명령: 등록, 목록, 종료, 삭제?id={숫자}, 수정?id={숫자}, 빌드");
             }
 
         }
